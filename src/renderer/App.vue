@@ -1,0 +1,323 @@
+<template>
+	<div id="app">
+		<sidebar/>
+		<router-view></router-view>
+	</div>
+</template>
+
+<script lang="ts">
+import Sidebar from "./components/sidebar/Sidebar.vue";
+import Vue from "vue";
+import { FileUtil } from "./utils/FileUtil";
+
+export default Vue.extend({
+	name: "app",
+	data() {
+		return {};
+	},
+	components: { Sidebar },
+	computed: {},
+	async beforeCreate() {
+		this.$store.dispatch("loadRuneData");
+		let champions: string[] = FileUtil.readFileNamesFromDataDirectory();
+		this.$store.commit("setMatchupList", champions);
+	},
+	created() {
+	},
+	methods: {},
+	async updated() {
+},
+	async mounted() {
+	}
+});
+</script>
+
+<style lang="scss">
+	$textColor: #828290;
+	$inputColor: #201f24;
+	$primaryColor: #f51d45;
+	$buttonColor: #2a2930;
+
+	$finalWidth: 100vw;
+	$finalHeight: 116px;
+	$scrollBarHeight: 5px;
+
+	* {
+		padding: 0;
+		margin: 0;
+        font-family: 'Open Sans', sans-serif;
+		font-weight: 500;
+	}
+
+	body {
+		background: #F0F3F6;
+	}
+
+	
+h2 {
+  margin: 0;
+  font-size: 2.25rem;
+  font-weight: bold;
+  letter-spacing: -0.025em;
+  color: #fff;
+}
+
+
+h3 {
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+}
+
+h5 {
+        font-family: 'Open Sans', sans-serif;
+                        font-size: 10px;
+                        font-weight: 600;
+                        letter-spacing: 3px;
+                    
+	}
+
+p {
+  font-size: 12px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+}
+
+	.display-none {
+		display: none;
+	}
+
+	.ytPlayer {
+		position: fixed;
+		bottom: 20px;
+		right: 20px;
+		width: 16;
+		height: 9;
+	}
+
+	.width-100 {
+		width: 100%;
+	}
+
+	.flex {
+		display: flex;
+	}
+
+	#app {
+		display: flex;
+		flex-direction: row;
+		width: 100%;
+	}
+
+	.wrapper {
+		width: 100%;
+	}
+
+	.contentSidebarCollapsed {
+		display: flex;
+		flex-direction: row;
+		height: fit-content;
+		flex-grow: 2;
+		margin-left: 58px;
+	}
+
+	.contentSidebar {
+		display: flex;
+		flex-direction: row;
+		height: fit-content;
+		flex-grow: 2;
+		margin-left: 250px;
+	}
+
+	.bar-bottom {
+		position: absolute;
+		bottom: 0;
+		background: #f51d45;
+		height: 5px;
+	}
+
+	::-webkit-scrollbar {
+		width: $scrollBarHeight;
+		height: $scrollBarHeight;
+	}
+
+	::-webkit-scrollbar-button {
+		display: none;
+	}
+
+	::-webkit-scrollbar-thumb {
+		background: $primaryColor;
+	}
+
+	@keyframes spinAround {
+		0% {
+			transform: rotate(0deg);
+		}
+		50% {
+			transform: rotate(180deg);
+		}
+		100% {
+			transform: rotate(360deg);
+		}
+	}
+
+	.loading-overlay {
+		bottom: 0;
+		left: 0;
+		position: absolute;
+		right: 0;
+		top: 0;
+		align-items: center;
+		display: none;
+		justify-content: center;
+		overflow: hidden;
+	}
+
+	.loading-overlay.is-active {
+		display: flex;
+	}
+
+	.loading-overlay.is-full-page {
+		z-index: 999;
+		position: fixed;
+		left: 250px;
+	}
+
+	.loading-overlay.is-full-page .loading-icon:after {
+		top: calc(50% - 2.5em);
+		left: calc(50% - 2.5em);
+		width: 5em;
+		height: 5em;
+	}
+
+	.loading-overlay .loading-background {
+		bottom: 0;
+		left: 0;
+		position: absolute;
+		right: 0;
+		top: 0;
+		background: #232228;
+	}
+
+	.loading-overlay .loading-icon {
+		position: relative;
+	}
+
+	.loading-overlay .loading-icon:after {
+		animation: spinAround 0.5s infinite linear;
+		border: 2px solid $primaryColor;
+		border-radius: 290486px;
+		border-right-color: transparent;
+		border-top-color: transparent;
+		content: "";
+		display: block;
+		height: 1em;
+		position: relative;
+		width: 1em;
+		position: absolute;
+		top: calc(50% - 1.5em);
+		left: calc(50% - 1.5em);
+		width: 3em;
+		height: 3em;
+		border-width: 5px;
+	}
+
+	.youtubePlayer {
+		position: absolute;
+		-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	}
+
+	.snackbar.is-success {
+		border-bottom: 5px solid green !important;
+
+		.text {
+			color: green;
+		}
+	}
+
+	.snackbar.is-info {
+		border-bottom: 5px solid lightblue !important;
+
+		.text {
+			color: lightblue;
+		}
+	}
+
+	.snackbar.is-warning {
+		border-bottom: 5px solid yellow !important;
+
+		.text {
+			color: yellow;
+		}
+	}
+
+	.snackbar.is-danger {
+		border-bottom: 5px solid red !important;
+
+		.text {
+			color: red;
+		}
+	}
+
+	.snackbar {
+		max-width: 400px;
+		min-width: 400px;
+		position: fixed;
+		background: $inputColor !important;
+		z-index: 99;
+		top: 25px;
+		left: calc(100% - 50% - (400px / 2));
+		background: none;
+		padding: 0 0 0 30px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-bottom: 5px solid $primaryColor;
+
+		.text {
+			flex-grow: 2;
+			background: none;
+			padding: 12px 0 12px 0;
+			min-width: 270px;
+			max-width: 270px;
+		}
+
+		.action {
+			.button {
+				border: none;
+				background: $buttonColor;
+				min-width: 100px;
+				max-width: 100px;
+				color: $textColor;
+				padding: 15px 0;
+				margin-left: 30px;
+			}
+		}
+
+		div {
+			background: none;
+		}
+	}
+
+	.tag {
+		align-items: center;
+		background-color: none;
+		border-radius: 4px;
+		color: #4a4a4a;
+		display: inline-flex;
+		font-size: 0.75rem;
+		height: 2em;
+		justify-content: center;
+		line-height: 1.5;
+		white-space: nowrap;
+
+		span {
+			background: none;
+		}
+	}
+
+	.tag.is-info {
+		background-color: #363636;
+		color: #f5f5f5;
+	}
+</style>

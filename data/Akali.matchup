@@ -1,0 +1,77 @@
+{
+  "champion": "Akali",
+  "notes": "",
+  "items": "",
+  "runeSets": [
+    {
+      "id": 0,
+      "title": "Standard",
+      "main": 2,
+      "secondary": 0,
+      "keystone": {"slot": 0, "rune": 3},
+      "rune1": {"slot": 1, "rune": 1}, 
+      "rune2": {"slot": 2, "rune": 1}, 
+      "rune3": {"slot": 3, "rune": 0}, 
+      "rune4": {"slot": 1, "rune": 1}, 
+      "rune5": {"slot": 3, "rune": 2}
+    }
+  ],
+  "skillOrder": {
+    "description": "R > Q > E > W",
+    "skillOrder": [
+      "Q",
+      "E",
+      "W",
+      "Q",
+      "Q",
+      "R"
+    ]
+  },
+  "matchupList": [
+    {
+      "role": "Top",
+      "champion": "Aatrox",
+      "difficulty": "skill",
+      "runen": 0,
+      "do_s": [
+        "Q - Passive auto trade early while dodging Q's",
+        "Use passive MS to dodge his Q's",
+        "Abuse his high CDs after he uses his 3rd Q",
+        "Make use of all your Abilites / Passive to dodge his Abilites",
+        "Getting hit by his none empowered Q is fine",
+        "Short trades - All in if he uses his third Q and you have a lot of energy left"
+      ],
+      "don_ts": [
+        "let him land outer empowered Q's",
+        "All in him when he is 100% hp"
+      ],
+      "notes": [
+        "His W grants true sight of you",
+        "Use E/R to dodge his empowered Q's",
+        "His early healing is not strong especially when you dodge his spells"
+      ]
+    },
+    {
+      "role": "Top",
+      "champion": "Camille",
+      "difficulty": "easy",
+      "runen": 0,
+      "do_s": [
+        "Q Passive auto Trade her early",
+        "Her passive can either give an Armour or MR shield, if she gets an Armour shield then you can Q her to do damage, if its magic then use R / Autos",
+        "Dodge her E with your own E / Use W if its too late to dodge so she cant abuse her attack speed",
+        "Avoid her outer W since that heals her and does extra damage to you + slows",
+        "At 6 you can all in her if she has no passive / wastes E"
+      ],
+      "don_ts": [
+        "Trying to short trade after she hit her E on you without shroud",
+        "get hit by w",
+        "Standing too close to a wall when her E is up"
+      ],
+      "notes": [
+        "Only works when her passive is on cooldown*",
+        "As soon as her E connects to the wall you can cancel it with CC**"
+      ]
+    }
+  ]
+}
