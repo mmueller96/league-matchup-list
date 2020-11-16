@@ -21,10 +21,13 @@
                     <td>
                         Notes
                     </td>
+                    <td>
+                        Actions
+                    </td>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="matchup in matchups" v-bind:key="`matchup${matchup.champion}${matchup.role}`">
+                <tr v-for="(matchup, index) in matchups" v-bind:key="`matchup${matchup.champion}${matchup.role}`">
                     <td class="roleCell"><img src="../../../assets/position/Position_Grandmaster-Top.png" /></td>
                     <td class="championCell"><img :src="`http://ddragon.leagueoflegends.com/cdn/10.23.1/img/champion/${matchup.champion}.png`" /></td>
                     <td class="runeCell">
@@ -60,6 +63,13 @@
                             <li v-for="(notes, index) in matchup.notes" v-bind:key="`note${index}`">{{ notes }}</li>                                                                               
                         </ul>
                     </td>
+                    <td v-if="index !== indexToEdit">
+                        <button class="editButton" @click="edit(matchup, index)">edit</button>
+                    </td>
+                    <td v-if="index === indexToEdit">
+                        <button class="saveButton" @click="save(index)">edit</button>
+                        <button class="cancelButton" @click="cancel(index)">edit</button>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -69,10 +79,30 @@
 <script lang="ts">
 import Vue from "vue";
 import { Matchup } from "../../../store/types";
+import { IMatchupList } from "../../types";
 
 export default Vue.extend({
 	name: "card",
     props: ["matchups"],
+    data() {
+        return {
+            indexToEdit: -1,
+            dataToEdit: {},
+        }
+    },
+    methods: {
+        edit(matchup: IMatchupList, index: number): void {
+            this.dataToEdit = matchup;
+            this.indexToEdit = index;
+        },
+        save(index: number): void {
+            
+        },
+        cancel(index: number): void {
+            this.indexToEdit = -1;
+            //TODO: reset to old data
+        }
+    },
     computed: {
         selectedMatchup(): string {
 			return this.$store.state.Matchup.selectedMatchup;
@@ -243,6 +273,14 @@ export default Vue.extend({
                             }
                         }
                     }
+                }
+
+                .editButton {
+                    border-radius: 100%;
+                    width: 39px;
+                    height: 39px;
+                    outline: none;
+                    cursor: pointer;
                 }
             }
         }
