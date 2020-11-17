@@ -53,16 +53,38 @@
                             <li v-for="(do_, index) in matchup.do_s" v-bind:key="`do${index}`">{{ do_ }}</li>                                                        
                         </ul>
                     </td>
-                    <td class="dontsCell">
+
+                    <!-- Dont's Col -->
+                    <td class="dontsCell" v-if="index !== indexToEdit">
                         <ul>
                             <li v-for="(dont_, index) in matchup.don_ts" v-bind:key="`dont${index}`">{{ dont_ }}</li>                                              
                         </ul>
                     </td>
-                    <td class="notesCell">
+                    <td class="dontsCell" v-if="index === indexToEdit">
+                        <ul>
+                            <li class="tag" @dblclick="selectDont(dont_, index)" v-for="(dont_, index) in matchup.don_ts" v-bind:key="`dont${index}`">
+                                <p>{{ dont_ }}</p>
+                                <button>x</button>
+                            </li>                                              
+                            <input v-model="selectedDonts.dont" />
+                            <button @click="selectedDonts = {dont: '', index: -1}">clear</button>
+                        </ul>
+                    </td>
+
+                    <!-- Notes Col -->
+                    <td class="notesCell" v-if="index !== indexToEdit">
                         <ul>
                             <li v-for="(notes, index) in matchup.notes" v-bind:key="`note${index}`">{{ notes }}</li>                                                                               
                         </ul>
                     </td>
+                    <td class="notesCell" v-if="index === indexToEdit">
+                        <ul>
+                            <li class="tag" @dblclick="selectNote(notes, index)" v-for="(notes, index) in matchup.notes" v-bind:key="`note${index}`">{{ notes }}</li>
+                            <input v-model="selectedNote.note"/>                                                                             
+                        </ul>
+                    </td>
+
+                    <!-- Actions Col -->
                     <td v-if="index !== indexToEdit">
                         <button class="editButton" @click="edit(matchup, index)">edit</button>
                     </td>
@@ -88,9 +110,17 @@ export default Vue.extend({
         return {
             indexToEdit: -1,
             dataToEdit: {},
+            selectedNote: {note: "", index: -1},
+            selectedDonts: {dont: "", index: -1},
         }
     },
     methods: {
+        selectDont(dont: string, index: number): void {
+            this.selectedDonts = {dont: dont, index: index};
+        },
+        selectNote(note: string, index: number): void {
+            this.selectedNote = {note: note, index: index};
+        },
         edit(matchup: IMatchupList, index: number): void {
             this.dataToEdit = matchup;
             this.indexToEdit = index;
@@ -244,6 +274,9 @@ export default Vue.extend({
                             list-style: none;
 
                             > li {
+                                &.tag {
+                                    background: black;
+                                }
 
                                 &::before {
                                     content: "-";
@@ -265,6 +298,9 @@ export default Vue.extend({
                             list-style: none;
 
                             > li {
+                                &.tag {
+                                    background: black;
+                                }
 
                                 &::before {
                                     content: "-";
@@ -276,6 +312,22 @@ export default Vue.extend({
                 }
 
                 .editButton {
+                    border-radius: 100%;
+                    width: 39px;
+                    height: 39px;
+                    outline: none;
+                    cursor: pointer;
+                }
+
+                .saveButton {
+                    border-radius: 100%;
+                    width: 39px;
+                    height: 39px;
+                    outline: none;
+                    cursor: pointer;
+                }
+
+                .cancelButton {
                     border-radius: 100%;
                     width: 39px;
                     height: 39px;
