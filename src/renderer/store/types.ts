@@ -15,6 +15,7 @@ export namespace Matchup {
 		removeMatchup: (state: Matchup.State, payload: IMatchupListItem) => void;
 		setMatchupList: (state: Matchup.State, champions: string[]) => void;
 		setMatchupData: (state: Matchup.State, matchupData: Matchup.IMatchupData) => void;
+		setMatchupListFromData: (state: Matchup.State, matchupList: IMatchupList) => void;
 		selectMatchup: (state: Matchup.State, champion: string) => void;
 		setChampionData: (state: Matchup.State, payload: IChampionData) => void;
 		setRuneData: (state: Matchup.State, runeData: any) => void;
@@ -40,6 +41,7 @@ export namespace Matchup {
 
 	export interface IMatchupData {
 		champion: string;
+		role: string;
 		notes: string;
 		items: string;
 		runeSets: IRuneSet[];

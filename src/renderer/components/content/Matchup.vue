@@ -27,7 +27,6 @@
 			<div class="gridContainerItemMatchupList">
 				<Card headline="Matchup List" :isProfile="false">
 					<MatchupList :matchups="selectedMatchupList" />
-					<button class="addItemButton">add matchup</button>
 				</Card>
 			</div>
 			<div class="gridItemLastGames">
@@ -116,31 +115,15 @@ export default Vue.extend({
 		grid-template-columns: auto auto auto;
 		grid-template-areas:
 		'profile notes notes'
+		'matchupList matchupList matchupList'
 		'runes skillOrder skillOrder'
 		'runes items items'
-		'matchupList matchupList matchupList'
 		'lastGames lastGames lastGames';
 		display: inline-grid;
 		grid-column-gap: 30px;
 		grid-row-gap: 30px;
 		padding: 60px 30px 30px 30px;
 		overflow: scroll;
-
-		.addItemButton {
-			outline: none;
-			border: 1px dashed #C6C9CF;
-			width: 100%;
-			background: none;
-			padding: 18px 0;
-			cursor: pointer;
-			color: #C6C9CF;
-			text-transform: uppercase;
-			font-family: 'Open Sans', sans-serif;
-			font-weight: 600;
-			letter-spacing: 2px;
-			font-size: 10px;
-			margin-top: 20px;
-		}
 			
 		.gridContainerItemProfile {
 			grid-area: profile;

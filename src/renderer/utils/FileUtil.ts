@@ -1,4 +1,5 @@
 import * as fs from "fs";
+import { Matchup } from "../store/types";
 
 export class FileUtil {
     static readFileNamesFromDataDirectory() {
@@ -20,5 +21,9 @@ export class FileUtil {
 
     static getSettingsFromMatchupFile(champion: string): Buffer {
         return fs.readFileSync(`${__dirname}/../../../data/${champion}.matchup`);
+    }
+
+    static writeFile(selectedMatchupData: Matchup.IMatchupData): void {
+        return fs.writeFileSync(`${__dirname}/../../../data/${selectedMatchupData.champion}.matchup`, JSON.stringify(selectedMatchupData))
     }
 }

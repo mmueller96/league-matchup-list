@@ -7,6 +7,7 @@ import Tabs from 'buefy/dist/components/tabs';
 import Tag from "buefy/dist/components/tag";
 import Taginput from 'buefy/dist/components/taginput';
 import Toast from 'buefy/dist/components/toast';
+import Autocomplete from 'buefy/dist/components/autocomplete';
 import Vue from "vue";
 import VueDragDrop from 'vue-drag-drop';
 import VModal from 'vue-js-modal';
@@ -28,6 +29,7 @@ Vue.use(SnackBar);
 Vue.use(Loading);
 Vue.use(VueDragDrop);
 Vue.use(Tabs);
+Vue.use(Autocomplete);
 
 /* eslint-disable no-new */
 new Vue({

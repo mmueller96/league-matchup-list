@@ -10,9 +10,7 @@
 			</div>
 
 			<div v-for="champion in matchupList" v-bind:key="`champion${champion.id}`">
-				<router-link :to="{name: 'matchup', params: { champion: champion.name } }">
-					<img :src="`http://ddragon.leagueoflegends.com/cdn/10.22.1/img/champion/${champion.name}.png`" class="championIcon"  @click="changeMatchup(champion)"/>
-				</router-link>
+				<img :src="`http://ddragon.leagueoflegends.com/cdn/10.22.1/img/champion/${champion.name}.png`" class="championIcon"  @click="changeMatchup(champion)"/>
 			</div>
 		</div>
 	</div>
@@ -39,6 +37,7 @@ export default Vue.extend({
 			await this.$store.dispatch("pickMatchup", champion);
 			let data: Matchup.IMatchupData = JSON.parse(FileUtil.getSettingsFromMatchupFile(champion.name).toString()) as Matchup.IMatchupData;
 			this.$store.commit("setMatchupData", data);
+			this.$router.push({name: 'matchup', params: {champion: champion.name}});
 		}
 	},
 	computed: {

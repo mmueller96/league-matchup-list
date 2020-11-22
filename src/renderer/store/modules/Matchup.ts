@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { IMatchupList } from '../../components/types';
+import { FileUtil } from '../../utils/FileUtil';
 import { Matchup } from '../types';
 
 const state: Matchup.State = {
@@ -20,12 +21,19 @@ const mutations: Matchup.Mutations = {
 		})
 	},
 	setMatchupList(state: Matchup.State, champions: string[]): void {
+		state.matchupList = [];
 		for (const [index, champion] of champions.entries()) {
 			state.matchupList.push({id: index, name: champion});
 		}
 	},
 	setMatchupData(state: Matchup.State, matchupData: Matchup.IMatchupData): void {
 		state.selectedMatchupData = matchupData;
+	},
+	setMatchupListFromData(state: Matchup.State, matchupList: IMatchupList): void {
+		//@ts-ignore
+		state.selectedMatchupData.matchupList = matchupList;
+		//@ts-ignore
+		FileUtil.writeFile(state.selectedMatchupData);
 	},
 	selectMatchup(state: Matchup.State, champion: string): void {
 		state.selectedMatchup = champion;
