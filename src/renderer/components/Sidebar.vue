@@ -20,8 +20,8 @@
 import Vue from "vue";
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { Matchup } from "../../store/types";
-import { FileUtil } from "../../utils/FileUtil";
+import { Matchup } from "../store/types";
+import { FileUtil } from "../utils/FileUtil";
 
 export default Vue.extend({
 	name: "sidebar",

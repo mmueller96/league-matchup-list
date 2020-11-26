@@ -38,13 +38,13 @@
 
 <script lang="ts">
 import Vue from "vue";
-import Card from "@/components/content/utils/Card.vue";
-import SkillOrder from "@/components/content/utils/SkillOrder.vue";
-import MatchupList from "@/components/content/utils/MatchupList.vue";
-import Runes from "@/components/content/utils/Runes.vue";
+import Card from "@/components/Card.vue";
+import SkillOrder from "@/components/SkillOrder.vue";
+import MatchupList from "@/components/MatchupList.vue";
+import Runes from "@/components/Runes.vue";
 const path = require('path'); 
-import { EKeyStones, EPrecisionRunes, EDominationRunes, ERuneTypes, IRuneSet, ISkillOrder, IMatchupList } from "../types";
-import { Matchup } from "../../store/types";
+import { EKeyStones, EPrecisionRunes, EDominationRunes, ERuneTypes, IRuneSet, ISkillOrder, IMatchupList } from "../components/types";
+import { Matchup } from "../store/types";
 const { dialog } = require('electron').remote;
 const fs = require('fs');
 

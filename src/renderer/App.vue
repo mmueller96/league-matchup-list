@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts">
-import Sidebar from "./components/sidebar/Sidebar.vue";
+import Sidebar from "./components/Sidebar.vue";
 import Vue from "vue";
 import { FileUtil } from "./utils/FileUtil";
 
@@ -81,6 +81,23 @@ p {
   font-size: 12px;
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
+}
+
+input {
+	padding: 8px 15px;
+	outline: none;
+	border: 1px solid #C6C9CF;
+    border-radius: 5px;
+	font-size: 12px;
+	font-weight: 300;
+
+	&:focus {
+		border: 1px solid #474B4F;
+	}
+
+	&:hover {
+		border: 1px solid #707070;
+	}
 }
 
 	.display-none {

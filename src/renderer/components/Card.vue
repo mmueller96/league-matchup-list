@@ -16,7 +16,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { Matchup } from "../../../store/types";
+import { Matchup } from "../store/types";
 
 export default Vue.extend({
 	name: "card",

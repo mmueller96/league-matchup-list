@@ -8,12 +8,12 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: require('@/components/content/Home').default
+      component: require('@/layouts/Home').default
     },
     {
       path: '/matchup/:champion',
       name: 'matchup',
-      component: require('@/components/content/Matchup').default
+      component: require('@/layouts/Matchup').default
     },
   ]
 })

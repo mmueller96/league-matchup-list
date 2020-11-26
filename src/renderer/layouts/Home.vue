@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import Headline from "@/components/content/utils/Headline.vue";
+import Headline from "@/components/Headline.vue";
 
 export default Vue.extend({
 	name: "home",

@@ -30,18 +30,18 @@
                 <tr v-for="(matchup, index) in matchupsState" v-bind:key="`matchup${matchup.champion}${matchup.role}`">
                     <!-- Role Cell -->
                     <td class="roleCell" v-if="index !== indexToEdit">
-                        <img src="../../../assets/position/Position_Grandmaster-Top.png" v-if="matchup.role === 'Top'" />
-                        <img src="../../../assets/position/Position_Grandmaster-Jungle.png" v-if="matchup.role === 'Jungle'" />
-                        <img src="../../../assets/position/Position_Grandmaster-Mid.png" v-if="matchup.role === 'Mid'" />
-                        <img src="../../../assets/position/Position_Grandmaster-Bot.png" v-if="matchup.role === 'Bot'" />
-                        <img src="../../../assets/position/Position_Grandmaster-Support.png" v-if="matchup.role === 'Support'" />
+                        <img src="../assets/position/Position_Grandmaster-Top.png" v-if="matchup.role === 'Top'" />
+                        <img src="../assets/position/Position_Grandmaster-Jungle.png" v-if="matchup.role === 'Jungle'" />
+                        <img src="../assets/position/Position_Grandmaster-Mid.png" v-if="matchup.role === 'Mid'" />
+                        <img src="../assets/position/Position_Grandmaster-Bot.png" v-if="matchup.role === 'Bot'" />
+                        <img src="../assets/position/Position_Grandmaster-Support.png" v-if="matchup.role === 'Support'" />
                     </td>
                     <td class="roleCell" v-if="index === indexToEdit">
-                        <img src="../../../assets/position/Position_Grandmaster-Top.png" @click="toggleRole('Top')" v-if="dataToEdit.role === 'Top' || showRoleSelection" />
-                        <img src="../../../assets/position/Position_Grandmaster-Jungle.png" @click="toggleRole('Jungle')" v-if="dataToEdit.role === 'Jungle' || showRoleSelection" />
-                        <img src="../../../assets/position/Position_Grandmaster-Mid.png" @click="toggleRole('Mid')" v-if="dataToEdit.role === 'Mid' || showRoleSelection" />
-                        <img src="../../../assets/position/Position_Grandmaster-Bot.png" @click="toggleRole('Bot')" v-if="dataToEdit.role === 'Bot' || showRoleSelection" />
-                        <img src="../../../assets/position/Position_Grandmaster-Support.png" @click="toggleRole('Support')" v-if="dataToEdit.role === 'Support' || showRoleSelection" />
+                        <img src="../assets/position/Position_Grandmaster-Top.png" @click="toggleRole('Top')" v-if="dataToEdit.role === 'Top' || showRoleSelection" />
+                        <img src="../assets/position/Position_Grandmaster-Jungle.png" @click="toggleRole('Jungle')" v-if="dataToEdit.role === 'Jungle' || showRoleSelection" />
+                        <img src="../assets/position/Position_Grandmaster-Mid.png" @click="toggleRole('Mid')" v-if="dataToEdit.role === 'Mid' || showRoleSelection" />
+                        <img src="../assets/position/Position_Grandmaster-Bot.png" @click="toggleRole('Bot')" v-if="dataToEdit.role === 'Bot' || showRoleSelection" />
+                        <img src="../assets/position/Position_Grandmaster-Support.png" @click="toggleRole('Support')" v-if="dataToEdit.role === 'Support' || showRoleSelection" />
                     </td>
 
                     <!-- Champion Cell -->
@@ -127,12 +127,20 @@
 
                     <!-- Actions Col -->
                     <td v-if="index !== indexToEdit">
-                        <button class="editButton" @click="edit(matchup, index)">edit</button>
-                        <button class="deleteButton" @click="delete_(index)">delete</button>
+                        <button class="editButton" @click="edit(matchup, index)">
+                            <font-awesome-icon :icon="icon.edit" size="1x" />
+                        </button>
+                        <button class="deleteButton" @click="delete_(index)">
+                            <font-awesome-icon :icon="icon.delete" size="1x" />
+                        </button>
                     </td>
                     <td v-if="index === indexToEdit">
-                        <button class="saveButton" @click="save(index)">save</button>
-                        <button class="cancelButton" @click="cancel(index)">cancel</button>
+                        <button class="saveButton" @click="save(index)">
+                            <font-awesome-icon :icon="icon.save" size="1x" />
+                        </button>
+                        <button class="cancelButton" @click="cancel(index)">
+                            <font-awesome-icon :icon="icon.cancel" size="1x" />
+                        </button>
                     </td>
                 </tr>
             </tbody>
@@ -143,13 +151,19 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { Matchup } from "../../../store/types";
-import { IMatchupList } from "../../types";
 //@ts-ignore
-import champions from "../../../assets/champions.json";
+import champions from "../assets/champions.json";
+import { Matchup } from "../store/types";
+import { IMatchupList } from "./types";
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faSave } from '@fortawesome/free-solid-svg-icons';
+import { faPen } from '@fortawesome/free-solid-svg-icons';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 export default Vue.extend({
-	name: "matchupList",
+    name: "matchupList",
+    components: { FontAwesomeIcon },
     props: ["matchups"],
     data() {
         return {
@@ -163,6 +177,7 @@ export default Vue.extend({
             showRoleSelection: false,
             champions: [],
             selected: null,
+            icon: { cancel: faTimes, save: faSave, edit: faPen, delete: faTrashAlt },
         }
     },
     mounted() {
@@ -474,7 +489,7 @@ export default Vue.extend({
 
                 .tag {
                     background: #EAEAEA;
-                    border-radius: 10px;
+                    border-radius: 5px;
                     padding: 3px 0px 3px 20px;
                     cursor: pointer;
                     user-select: none;
@@ -513,34 +528,46 @@ export default Vue.extend({
 
                 .editButton {
                     border-radius: 100%;
+                    border: none;
                     width: 39px;
                     height: 39px;
                     outline: none;
                     cursor: pointer;
+                    background: linear-gradient(90deg, rgba(29,196,233,1) 0%, rgba(29,233,182,1) 100%);
+                    color: white;
                 }
 
                 .deleteButton {
                     border-radius: 100%;
+                    border: none;
                     width: 39px;
                     height: 39px;
                     outline: none;
                     cursor: pointer;
+                    background: linear-gradient(90deg, rgba(141,10,2,1) 0%, rgba(244,66,54,1) 100%);
+                    color: white;                    
                 }
 
                 .saveButton {
                     border-radius: 100%;
+                    border: none;
                     width: 39px;
                     height: 39px;
                     outline: none;
                     cursor: pointer;
+                    background: linear-gradient(90deg, rgba(29,196,233,1) 0%, rgba(29,233,182,1) 100%);
+                    color: white;                    
                 }
 
                 .cancelButton {
                     border-radius: 100%;
+                    border: none;
                     width: 39px;
                     height: 39px;
                     outline: none;
                     cursor: pointer;
+                    background: linear-gradient(90deg, rgba(141,10,2,1) 0%, rgba(244,66,54,1) 100%);
+                    color: white;                    
                 }
             }
         }

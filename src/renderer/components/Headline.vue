@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import Icon from "@/components/content/utils/Icon.vue";
+import Icon from "@/components/Icon.vue";
 
 export default Vue.extend({
 	name: "headline",
