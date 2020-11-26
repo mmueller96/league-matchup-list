@@ -260,15 +260,20 @@ export default Vue.extend({
         delete_(index: number, champion: string): void {            
             //@ts-ignore
             this.$buefy.dialog.confirm({
-                message: `Do you really want to delete the entry of ${champion}?`,
+                type: "is-danger",
+                message: `<div class="dialogTitle">Are you sure?</div><div class="dialogText">Do you really want to remove ${champion} from the matchup list? <br> This deletion cannot be undone!</div>`,
+                hasIcon: true,
+                icon: 'exclamation',
+                iconPack: 'fa',
                 onConfirm: () => {
                     (this.matchupsState as IMatchupList[]).splice(index, 1);
                     this.$store.commit("setMatchupListFromData", this.matchupsState);
                     //@ts-ignore
                     this.$buefy.toast.open({
-                    message: `Entry of ${champion} successfully deleted!`,
-                    type: 'is-success'
-                })
+                        message: `Poof! Your matchup entry has been deleted!`,
+                        type: 'is-success',
+                        duration: 4000,
+                    });
                 }
             });
         },
@@ -281,6 +286,12 @@ export default Vue.extend({
             this.selectedDos = {do_: '', index: -1};
             this.selectedDonts = {dont: '', index: -1};
             this.selectedNote = {note: '', index: -1};
+            //@ts-ignore
+            this.$buefy.toast.open({
+                message: `Yaay! Your matchup was successfully saved!`,
+                type: 'is-success',
+                duration: 4000,
+            });
         },
         cancel(index: number): void {
             this.indexToEdit = -1;
