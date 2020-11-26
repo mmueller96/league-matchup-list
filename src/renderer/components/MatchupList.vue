@@ -54,24 +54,15 @@
                         </b-autocomplete>
                     </td>
 
-
-                    <td class="runeCell">
-                        <div class="runeCellWrapper">
-                            <div class="runeCellKeystone">
-                                <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Precision/Conqueror/Conqueror.png">               
-                            </div>
-                            <div class="runeCellRunes">
-                                <div class="runeCellMain">
-                                    <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Precision/Conqueror/Conqueror.png">               
-                                    <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Precision/Conqueror/Conqueror.png">               
-                                    <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Precision/Conqueror/Conqueror.png">               
-                                </div>
-                                <div class="runeCellSecondary">
-                                    <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Precision/Conqueror/Conqueror.png">               
-                                    <img src="https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Precision/Conqueror/Conqueror.png">               
-                                </div>
-                            </div>
-                        </div>
+                    <!-- Rune Cell -->
+                    <td class="runeCell" v-if="index !== indexToEdit">
+                        <Runes v-if="matchup.runen >= 0" :runeSets="runeSets" :selectedRuneSet="matchup.runen" :isMatchupList="true" />
+                        <p v-else>No Runes selected!</p>
+                    </td>
+                    <td class="runeCell" v-if="index === indexToEdit">
+                        <b-select v-model="dataToEdit.runen">
+                            <option v-for="(runeSet, index) in runeSets" v-bind:key="`matchupListRuneSet${index}`" :value="index">{{ runeSet.title }}</option>
+                        </b-select>
                     </td>
 
                     <!-- Do Col -->
@@ -139,7 +130,7 @@
                         <button class="editButton" @click="edit(matchup, index)">
                             <font-awesome-icon :icon="icon.edit" size="1x" />
                         </button>
-                        <button class="deleteButton" @click="delete_(index)">
+                        <button class="deleteButton" @click="delete_(index, matchup.champion)">
                             <font-awesome-icon :icon="icon.delete" size="1x" />
                         </button>
                     </td>
@@ -169,11 +160,12 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { faSave } from '@fortawesome/free-solid-svg-icons';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import Runes from "@/components/Runes.vue";
 
 export default Vue.extend({
     name: "matchupList",
-    components: { FontAwesomeIcon },
-    props: ["matchups"],
+    components: { FontAwesomeIcon, Runes },
+    props: ["matchups", "runeSets"],
     data() {
         return {
             matchupsState: [],
@@ -265,10 +257,20 @@ export default Vue.extend({
             this.indexToEdit = index;
             this.championToAdd = matchup.champion;
         },
-        delete_(index: number): void {
-            (this.matchupsState as IMatchupList[]).splice(index, 1);
-            this.$store.commit("setMatchupListFromData", this.matchupsState);
-            //TODO: DO YOU REALLY WANT TO DELETE?
+        delete_(index: number, champion: string): void {            
+            //@ts-ignore
+            this.$buefy.dialog.confirm({
+                message: `Do you really want to delete the entry of ${champion}?`,
+                onConfirm: () => {
+                    (this.matchupsState as IMatchupList[]).splice(index, 1);
+                    this.$store.commit("setMatchupListFromData", this.matchupsState);
+                    //@ts-ignore
+                    this.$buefy.toast.open({
+                    message: `Entry of ${champion} successfully deleted!`,
+                    type: 'is-success'
+                })
+                }
+            });
         },
         save(index: number): void {
             (this.matchupsState as IMatchupList[])[index] = this.dataToEdit as IMatchupList;
@@ -290,7 +292,7 @@ export default Vue.extend({
             this.selectedNote = {note: '', index: -1};
         },
         add(): void {
-            let newData: IMatchupList = {role: "Top", do_s: [], don_ts: [], notes: [], champion: "", difficulty: "", runen: 0}
+            let newData: IMatchupList = {role: "Top", do_s: [], don_ts: [], notes: [], champion: "", difficulty: "", runen: -1}
             let newLength: number = (this.matchupsState as IMatchupList[]).push(newData);
             this.indexToEdit = newLength - 1;
             this.dataToEdit = newData;
@@ -394,42 +396,6 @@ export default Vue.extend({
                         display: table-cell;
                         text-align: center;
                         padding-right: 20px;
-
-                        >.runeCellWrapper {
-                            display: flex;
-                            flex-direction: row;
-                            justify-content: center;
-                            align-items: center;
-
-                            >.runeCellKeystone {
-                                >img {
-                                    width: 48px;
-                                    height: 48px;
-                                }
-                            }
-
-                            >.runeCellRunes{
-                                >.runeCellMain {
-                                    display: flex;
-                                    flex-direction: row;
-                                    justify-content: center;
-                                    align-items: center;
-                                }
-
-                                >.runeCellSecondary {
-                                    display: flex;
-                                    flex-direction: row;
-                                    justify-content: center;
-                                    align-items: center;
-                                }
-
-                                img {
-                                    width: 32px;
-                                    height: 32px;
-                                }
-                            }
-                        }
-                        
                     }
 
                     &.dosCell {

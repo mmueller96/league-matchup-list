@@ -65,7 +65,7 @@
     "@types/socket.io-client": "^1.4.32",
     "axios": "^0.18.0",
     "base-64": "^0.1.0",
-    "buefy": "^0.7.1",
+    "buefy": "0.9.4",
     "chokidar": "^2.0.4",
     "gsap": "^2.0.2",
     "jsonwebtoken": "^8.4.0",

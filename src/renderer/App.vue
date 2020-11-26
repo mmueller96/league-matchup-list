@@ -98,6 +98,21 @@ input {
 	&:hover {
 		border: 1px solid #707070;
 	}
+
+	&.input {
+		width: calc(100% - 20px - 30px);
+		margin: 0 10px;
+	}
+}
+
+select {
+	padding: 8px 15px;
+	outline: none;
+	border: 1px solid #C6C9CF;
+    border-radius: 5px;
+	font-size: 12px;
+	font-weight: 300;
+	width: 100%;
 }
 
 button {

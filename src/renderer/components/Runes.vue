@@ -1,13 +1,33 @@
 <template>
-    <div class="runes">
+    <div v-if="isMatchupList">
+        <div class="runeCellWrapper">
+            <div class="runeCellKeystone">
+                <Rune :isKeystone="true" :tree="runeSets[selectedRuneSet].main" :runeSlot="runeSets[selectedRuneSet].keystone.slot" :rune="runeSets[selectedRuneSet].keystone.rune" />
+            </div>
+            <div class="runeCellRunes">
+                <div class="runeCellMain">
+                    <Rune :isKeystone="false" :tree="runeSets[selectedRuneSet].main" :runeSlot="runeSets[selectedRuneSet].rune1.slot" :rune="runeSets[selectedRuneSet].rune1.rune" />
+                    <Rune :isKeystone="false" :tree="runeSets[selectedRuneSet].main" :runeSlot="runeSets[selectedRuneSet].rune2.slot" :rune="runeSets[selectedRuneSet].rune2.rune" />
+                    <Rune :isKeystone="false" :tree="runeSets[selectedRuneSet].main" :runeSlot="runeSets[selectedRuneSet].rune3.slot" :rune="runeSets[selectedRuneSet].rune3.rune" />
+                </div>
+                <div class="runeCellSecondary">
+                    <Rune :isKeystone="false" :tree="runeSets[selectedRuneSet].secondary" :runeSlot="runeSets[selectedRuneSet].rune4.slot" :rune="runeSets[selectedRuneSet].rune4.rune" />
+                    <Rune :isKeystone="false" :tree="runeSets[selectedRuneSet].secondary" :runeSlot="runeSets[selectedRuneSet].rune5.slot" :rune="runeSets[selectedRuneSet].rune5.rune" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="runes" v-else>
         <div v-for="(rune, index) in runeSets" v-bind:key="`rune${index}`" class="runeWrapper">
             <h5>{{ rune.title }}</h5>
-            <img class="keystone" :src="`https://ddragon.leagueoflegends.com/cdn/img/${runeData[rune.main].slots[rune.keystone.slot].runes[rune.keystone.rune].icon}`" />
-            <img class="rune" :src="`https://ddragon.leagueoflegends.com/cdn/img/${runeData[rune.main].slots[rune.rune1.slot].runes[rune.rune1.rune].icon}`" />
-            <img class="rune" :src="`https://ddragon.leagueoflegends.com/cdn/img/${runeData[rune.main].slots[rune.rune2.slot].runes[rune.rune2.rune].icon}`" />
-            <img class="rune" :src="`https://ddragon.leagueoflegends.com/cdn/img/${runeData[rune.main].slots[rune.rune3.slot].runes[rune.rune3.rune].icon}`" />
-            <img class="rune" :src="`https://ddragon.leagueoflegends.com/cdn/img/${runeData[rune.secondary].slots[rune.rune4.slot].runes[rune.rune4.rune].icon}`" />
-            <img class="rune" :src="`https://ddragon.leagueoflegends.com/cdn/img/${runeData[rune.secondary].slots[rune.rune5.slot].runes[rune.rune5.rune].icon}`" />
+            
+            <Rune :isKeystone="true" :tree="rune.main" :runeSlot="rune.keystone.slot" :rune="rune.keystone.rune" />
+            <Rune :isKeystone="false" :tree="rune.main" :runeSlot="rune.rune1.slot" :rune="rune.rune1.rune" />
+            <Rune :isKeystone="false" :tree="rune.main" :runeSlot="rune.rune2.slot" :rune="rune.rune2.rune" />
+            <Rune :isKeystone="false" :tree="rune.main" :runeSlot="rune.rune3.slot" :rune="rune.rune3.rune" />
+            <Rune :isKeystone="false" :tree="rune.secondary" :runeSlot="rune.rune4.slot" :rune="rune.rune4.rune" />
+            <Rune :isKeystone="false" :tree="rune.secondary" :runeSlot="rune.rune5.slot" :rune="rune.rune5.rune" />
         </div>
     </div>
 </template>
@@ -15,10 +35,12 @@
 <script lang="ts">
 import Vue from "vue";
 import { Matchup } from "../store/types";
+import Rune from "@/components/Rune.vue";
 
 export default Vue.extend({
-	name: "card",
-    props: ["runeSets"],
+	name: "runes",
+    props: ["runeSets", "selectedRuneSet", "isMatchupList"],
+    components: { Rune },
     mounted(): void {
         console.log("runeSets", this.runeSets);
         
@@ -48,15 +70,38 @@ export default Vue.extend({
         h5 {
             margin-bottom: 12px;
         }
+    }
+}
 
-        .keystone {
+.runeCellWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    >.runeCellKeystone {
+        >img {
             width: 48px;
             height: 48px;
-            background: black;
-            border-radius: 100px;
+        }
+    }
+
+    >.runeCellRunes{
+        >.runeCellMain {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
         }
 
-        .rune {
+        >.runeCellSecondary {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        img {
             width: 32px;
             height: 32px;
         }

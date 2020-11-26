@@ -26,7 +26,7 @@
 			</div>
 			<div class="gridContainerItemMatchupList">
 				<Card headline="Matchup List" :isProfile="false">
-					<MatchupList :matchups="selectedMatchupList" />
+					<MatchupList :matchups="selectedMatchupList" :runeSets="selectedRuneSet" />
 				</Card>
 			</div>
 			<div class="gridItemLastGames">
