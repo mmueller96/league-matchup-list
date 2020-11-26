@@ -52,13 +52,13 @@ const mutations: Matchup.Mutations = {
 
 const actions: Matchup.Actions = {
 	async pickMatchup({ commit }, champion: Matchup.IMatchupListItem): Promise<void> {
-		let responseData = await axios.get(`http://ddragon.leagueoflegends.com/cdn/10.23.1/data/en_US/champion/${champion.name}.json`)
+		let responseData = await axios.get(`http://ddragon.leagueoflegends.com/cdn/10.24.1/data/en_US/champion/${champion.name}.json`)
 		console.log(responseData.data);
 		commit("selectMatchup", champion.name);
 		commit("setChampionData", responseData.data);
 	},
 	async loadRuneData({ commit }): Promise<void> {
-		let responseData = await axios.get(`https://ddragon.leagueoflegends.com/cdn/10.23.1/data/en_GB/runesReforged.json`);
+		let responseData = await axios.get(`https://ddragon.leagueoflegends.com/cdn/10.24.1/data/en_GB/runesReforged.json`);
 		commit("setRuneData", responseData.data);
 	}
 };

@@ -100,6 +100,48 @@ input {
 	}
 }
 
+button {
+	outline: none;
+	cursor: pointer;
+	padding: 8px 15px;
+	font-size: 12px;
+	font-weight: 300;
+	border-radius: 5px;
+	border: 1px solid #C6CACF;
+	color: #C6CACF;
+	background: white;
+
+	&.primary {
+		padding: 8.5px 15.5px;
+		border: none;
+		background: linear-gradient(90deg, rgba(29,196,233,1) 0%, rgba(29,233,182,1) 100%);
+		color: white;
+	}
+
+	&.cancel {
+		padding: 8.5px 15.5px;
+		border: none;
+		background: linear-gradient(90deg, rgba(141,10,2,1) 0%, rgba(244,66,54,1) 100%);
+		color: white;
+	}
+
+	&.add {
+		outline: none;
+		border: 1px dashed #C6C9CF;
+		width: 100%;
+		background: none;
+		padding: 18px 0;
+		cursor: pointer;
+		color: #C6C9CF;
+		text-transform: uppercase;
+		font-family: 'Open Sans', sans-serif;
+		font-weight: 600;
+		letter-spacing: 2px;
+		font-size: 10px;
+		margin-top: 20px;
+	}
+}
+
 	.display-none {
 		display: none;
 	}

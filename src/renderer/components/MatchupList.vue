@@ -84,9 +84,12 @@
                         <ul>
                             <li class="tag" @dblclick="selectDo(do_, index)" v-for="(do_, index) in matchup.do_s" v-bind:key="`do${index}`">
                                 <p>{{ do_ }}</p>
-                                <button @click="removeDo(index)">x</button>
+                                <button class="tagDelete" @click="removeDo(index)">
+                                    <font-awesome-icon :icon="icon.cancel" size="1x" />
+                                </button>
                             </li>
                             <input v-model="selectedDos.do_" @keyup.enter="addOrEditDos()">
+                            <button class="primary" @click="addOrEditDos()">add</button>
                             <button @click="selectedDos = {do_: '', index: -1}">clear</button>
                         </ul>
                     </td>
@@ -101,9 +104,12 @@
                         <ul>
                             <li class="tag" @dblclick="selectDont(dont_, index)" v-for="(dont_, index) in matchup.don_ts" v-bind:key="`dont${index}`">
                                 <p>{{ dont_ }}</p>
-                                <button @click="removeDont(index)">x</button>
-                            </li>                                              
+                                <button class="tagDelete" @click="removeDont(index)">
+                                    <font-awesome-icon :icon="icon.cancel" size="1x" />
+                                </button>
+                            </li>
                             <input v-model="selectedDonts.dont" @keyup.enter="addOrEditDonts()"/>
+                            <button class="primary" @click="addOrEditDonts()">add</button>
                             <button @click="selectedDonts = {dont: '', index: -1}">clear</button>
                         </ul>
                     </td>
@@ -118,9 +124,12 @@
                         <div>
                             <div class="tag" @dblclick="selectNote(notes, index)" v-for="(notes, index) in matchup.notes" v-bind:key="`note${index}`">
                                 <p>{{ notes }}</p>
-                                <button @click="removeNote(index)">x</button>
+                                <button class="tagDelete" @click="removeNote(index)">
+                                    <font-awesome-icon :icon="icon.cancel" size="1x" />
+                                </button>
                             </div>
                             <input v-model="selectedNote.note" @keyup.enter="addOrEditNotes()"/>
+                            <button class="primary" @click="addOrEditNotes()">add</button>
                             <button @click="selectedNote = {note: '', index: -1}">clear</button>                    
                         </div>                                                   
                     </td>
@@ -145,7 +154,7 @@
                 </tr>
             </tbody>
         </table>
-        <button class="addItemButton" @click="add()">add matchup</button>
+        <button class="add" @click="add()">add matchup</button>
     </div>
 </template>
 
@@ -502,7 +511,7 @@ export default Vue.extend({
                         content: none !important;
                     }
 
-                    > button {
+                    > .tagDelete {
                         border-radius: 100%;
                         min-width: 16px;
                         max-width: 16px;
@@ -512,7 +521,9 @@ export default Vue.extend({
                         outline: none;
                         background: #04A9F5;
                         cursor: pointer;
-                        padding-top: -1px;
+                        padding: 0 !important;
+                        color: white;
+                        font-size: 10px;
     
                         &:hover {
                             background: #02557B;
@@ -572,21 +583,5 @@ export default Vue.extend({
             }
         }
     }
-
-    .addItemButton {
-		outline: none;
-		border: 1px dashed #C6C9CF;
-		width: 100%;
-		background: none;
-		padding: 18px 0;
-		cursor: pointer;
-		color: #C6C9CF;
-		text-transform: uppercase;
-		font-family: 'Open Sans', sans-serif;
-		font-weight: 600;
-		letter-spacing: 2px;
-		font-size: 10px;
-		margin-top: 20px;
-	}
 }
 </style>

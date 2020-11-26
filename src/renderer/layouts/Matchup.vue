@@ -11,9 +11,9 @@
 			</div>
 			<div class="gridContainerItemRunes">
 				<Card headline="Runen" :isProfile="false">
-					<!-- https://ddragon.leagueoflegends.com/cdn/10.23.1/data/en_GB/runesReforged.json -->
+					<!-- https://ddragon.leagueoflegends.com/cdn/10.24.1/data/en_GB/runesReforged.json -->
 					<Runes :runeSets="selectedRuneSet" />
-					<button class="addItemButton">add rune part</button>
+					<button class="add">add rune part</button>
 				</Card>
 			</div>
 			<div class="gridContainerItemSkillOrder">
