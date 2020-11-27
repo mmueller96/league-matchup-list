@@ -77,6 +77,9 @@ h5 {
                     
 	}
 
+
+	b {font-weight: 600;}
+
 p {
   font-size: 12px;
   font-family: 'Open Sans', sans-serif;

@@ -13,7 +13,6 @@
 				<Card headline="Runen" :isProfile="false">
 					<!-- https://ddragon.leagueoflegends.com/cdn/10.24.1/data/en_GB/runesReforged.json -->
 					<Runes :runeSets="selectedRuneSet" />
-					<button class="add">add rune part</button>
 				</Card>
 			</div>
 			<div class="gridContainerItemSkillOrder">
@@ -92,6 +91,7 @@ export default Vue.extend({
 		runeSet(): IRuneSet[] {
 			return [{
 				title: "Standard",
+				description: "Immer die standard Runen",
 				main: ERuneTypes.PRECISION,
 				secondary: ERuneTypes.DOMINATION,
 				keystone: {slot: 0, rune: EKeyStones.Conqueror} , 

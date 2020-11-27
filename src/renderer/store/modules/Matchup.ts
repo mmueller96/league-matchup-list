@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IMatchupList } from '../../components/types';
+import { IMatchupList, IRuneSet } from '../../components/types';
 import { FileUtil } from '../../utils/FileUtil';
 import { Matchup } from '../types';
 
@@ -29,7 +29,7 @@ const mutations: Matchup.Mutations = {
 	setMatchupData(state: Matchup.State, matchupData: Matchup.IMatchupData): void {
 		state.selectedMatchupData = matchupData;
 	},
-	setMatchupListFromData(state: Matchup.State, matchupList: IMatchupList): void {
+	setMatchupListFromData(state: Matchup.State, matchupList: IMatchupList[]): void {
 		//@ts-ignore
 		state.selectedMatchupData.matchupList = matchupList;
 		//@ts-ignore
@@ -47,7 +47,13 @@ const mutations: Matchup.Mutations = {
 	addMatchupListItemToMatchupData(state: Matchup.State, matchup: IMatchupList): void {
 		//@ts-ignore
 		state.selectedMatchupData.matchupList.push(matchup);
-	}
+	},
+	setRuneSetsFromData(state: Matchup.State, runeSets: IRuneSet[]): void {
+		//@ts-ignore
+		state.selectedMatchupData.runeSets = runeSets;
+		//@ts-ignore
+		FileUtil.writeFile(state.selectedMatchupData);
+	},
 };
 
 const actions: Matchup.Actions = {

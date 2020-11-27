@@ -15,11 +15,12 @@ export namespace Matchup {
 		removeMatchup: (state: Matchup.State, payload: IMatchupListItem) => void;
 		setMatchupList: (state: Matchup.State, champions: string[]) => void;
 		setMatchupData: (state: Matchup.State, matchupData: Matchup.IMatchupData) => void;
-		setMatchupListFromData: (state: Matchup.State, matchupList: IMatchupList) => void;
+		setMatchupListFromData: (state: Matchup.State, matchupList: IMatchupList[]) => void;
 		selectMatchup: (state: Matchup.State, champion: string) => void;
 		setChampionData: (state: Matchup.State, payload: IChampionData) => void;
 		setRuneData: (state: Matchup.State, runeData: any) => void;
 		addMatchupListItemToMatchupData: (state: Matchup.State, matchup: IMatchupList) => void;
+		setRuneSetsFromData: (state: Matchup.State, runeSets: IRuneSet[]) => void;
 	}
 
 	export interface Actions {

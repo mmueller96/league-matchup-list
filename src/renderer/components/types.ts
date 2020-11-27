@@ -86,6 +86,7 @@ export interface IRune {
 
 export interface IRuneSet {
 	title: string,
+	description: string,
 	main: ERuneTypes,
 	secondary: ERuneTypes,
 	keystone: IRune,

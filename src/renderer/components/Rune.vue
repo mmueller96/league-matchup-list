@@ -1,5 +1,6 @@
 <template>
-    <img :class="isKeystone ? 'keystone' : 'rune'" :src="`https://ddragon.leagueoflegends.com/cdn/img/${runeData[tree].slots[runeSlot].runes[rune].icon}`" />
+    <div v-if="rune === -1">No Rune.</div>
+    <img v-else :class="isKeystone ? 'keystone' : 'rune'" :src="`https://ddragon.leagueoflegends.com/cdn/img/${runeData[tree].slots[runeSlot].runes[rune].icon}`" />
 </template>
 
 <script lang="ts">
