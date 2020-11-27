@@ -160,7 +160,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { faSave } from '@fortawesome/free-solid-svg-icons';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import Runes from "@/components/Runes.vue";
+import Runes from "@/components/RuneSets.vue";
 
 export default Vue.extend({
     name: "matchupList",

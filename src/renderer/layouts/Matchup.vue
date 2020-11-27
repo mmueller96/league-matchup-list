@@ -40,7 +40,7 @@ import Vue from "vue";
 import Card from "@/components/Card.vue";
 import SkillOrder from "@/components/SkillOrder.vue";
 import MatchupList from "@/components/MatchupList.vue";
-import Runes from "@/components/Runes.vue";
+import Runes from "@/components/RuneSets.vue";
 const path = require('path'); 
 import { EKeyStones, EPrecisionRunes, EDominationRunes, ERuneTypes, IRuneSet, ISkillOrder, IMatchupList } from "../components/types";
 import { Matchup } from "../store/types";
