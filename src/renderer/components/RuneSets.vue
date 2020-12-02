@@ -97,6 +97,13 @@ export default Vue.extend({
     //@ts-ignore
     this.runeSetsState = [...this.runeSets];
   },
+  watch: {
+    runeSets(newRuneSet: any): void {
+      this.runeSetsState = [];
+      //@ts-ignore
+      this.runeSetsState = [...newRuneSet];
+    }
+  },
   methods: {
     edit(runeSet: IRuneSet, index: number): void {
       this.indexToEdit = index;
@@ -125,14 +132,14 @@ export default Vue.extend({
       (this.runeSetsState as IRuneSet[])[index] = newRuneData;
       this.$store.commit("setRuneSetsFromData", this.runeSetsState);
       this.indexToEdit = -1;
+      this.isPrimaryTreeSelection = false;
+      this.isSecondaryTreeSelection = false;
       //@ts-ignore
       this.$buefy.toast.open({
         message: `Yaay! Your rune set was successfully saved!`,
         type: "is-success",
         duration: 4000
       });
-      this.isPrimaryTreeSelection = false;
-      this.isSecondaryTreeSelection = false;
     },
     cancel(): void {
       this.indexToEdit = -1;

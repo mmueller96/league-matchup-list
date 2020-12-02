@@ -2,12 +2,12 @@
   <img
     v-if="rune === -1 && !isKeystone"
     :src="`./static/no-rune.png`"
-    @click="$emit('click')"
+    @click="disabled ? null : $emit('click')"
   />
   <img
     v-else-if="rune === -1 && isKeystone"
     :src="`./static/no-keystone.png`"
-    @click="$emit('click')"
+    @click="disabled ? null : $emit('click')"
   />
   <img
     v-else
@@ -15,7 +15,7 @@
     :src="
       `https://ddragon.leagueoflegends.com/cdn/img/${runeData[tree].slots[runeSlot].runes[rune].icon}`
     "
-    @click="$emit('click')"
+    @click="disabled ? null : $emit('click')"
   />
 </template>
 
@@ -24,7 +24,7 @@ import Vue from "vue";
 
 export default Vue.extend({
   name: "rune",
-  props: ["isKeystone", "tree", "runeSlot", "rune"],
+  props: ["isKeystone", "tree", "runeSlot", "rune", "disabled"],
   computed: {
     runeData(): any {
       return this.$store.state.Matchup.runeData;

@@ -212,6 +212,8 @@
             :runeTree="dataToEdit.secondary"
             :runeSlot="4"
             :runeToAddIndex="0"
+            :firstSelectedRune="dataToEdit.rune4"
+            :secondSelectedRune="dataToEdit.rune5"
             @selectRune="selectRune"
             @selectedRune="isRune4SelectionOpen = false"
           />
@@ -228,6 +230,8 @@
             :runeTree="dataToEdit.secondary"
             :runeSlot="5"
             :runeToAddIndex="1"
+            :firstSelectedRune="dataToEdit.rune4"
+            :secondSelectedRune="dataToEdit.rune5"
             @selectRune="selectRune"
             @selectedRune="isRune5SelectionOpen = false"
           />
@@ -348,6 +352,9 @@ export default Vue.extend({
     };
   },
   watch: {
+    value(newValue: any) {
+      this.dataToEdit = Object.assign({}, newValue);
+    },
     isEdit(isEdit: boolean) {
       if (!isEdit) {
         this.isPrimaryTreeSelection = false;

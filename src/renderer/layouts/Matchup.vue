@@ -42,7 +42,7 @@ import SkillOrder from "@/components/SkillOrder.vue";
 import MatchupList from "@/components/MatchupList.vue";
 import Runes from "@/components/RuneSets.vue";
 const path = require('path'); 
-import { EKeyStones, EPrecisionRunes, EDominationRunes, ERuneTypes, IRuneSet, ISkillOrder, IMatchupList } from "../components/types";
+import { IRuneSet, ISkillOrder, IMatchupList } from "../components/types";
 import { Matchup } from "../store/types";
 const { dialog } = require('electron').remote;
 const fs = require('fs');
@@ -88,20 +88,6 @@ export default Vue.extend({
 		selectedMatchupList(): IMatchupList[] {			
 			return (this.$store.state.Matchup.selectedMatchupData as Matchup.IMatchupData).matchupList;
 		},
-		runeSet(): IRuneSet[] {
-			return [{
-				title: "Standard",
-				description: "Immer die standard Runen",
-				main: ERuneTypes.PRECISION,
-				secondary: ERuneTypes.DOMINATION,
-				keystone: {slot: 0, rune: EKeyStones.Conqueror} , 
-				rune1: {slot: EPrecisionRunes.TriumphSlot, rune: EPrecisionRunes.Triumph}, 
-				rune2: {slot: EPrecisionRunes.LegendTenacitySlot, rune: EPrecisionRunes.LegendTenacity}, 
-				rune3: {slot: EPrecisionRunes.CoupDeGraceSlot, rune: EPrecisionRunes.CoupDeGrace}, 
-				rune4: {slot: EDominationRunes.TasteOfBloodSlot, rune: EDominationRunes.TasteOfBlood}, 
-				rune5: {slot: EDominationRunes.RavenousHunterSlot, rune: EDominationRunes.RelentlessHunter}, 
-			}]	
-		}
 	}
 });
 </script>
