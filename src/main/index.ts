@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain, Notification } from "electron";
+import { app, BrowserWindow, ipcMain } from "electron";
 
 let mainWindow: BrowserWindow | null;
 const winURL =
@@ -27,23 +27,6 @@ function createWindow() {
 }
 
 app.on("ready", createWindow);
-
-ipcMain.on('get-system-paths', (event, arg) => {
-  let paths: string[] = [];
-  paths.push(app.getPath('videos'));
-  paths.push(app.getPath("music"));
-  event.sender.send('get-system-paths-reply', paths);
-});
-
-ipcMain.on('show-notification', (event, arg) => {
-  console.log(Notification.isSupported());
-
-  let notify = new Notification({
-    title: "hallo",
-    body: "hallo"
-  });
-  notify.show();
-})
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {

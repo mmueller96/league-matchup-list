@@ -7,7 +7,7 @@
 				<Card :headline="selectedMatchup" :isProfile="true"/>
 			</div>
 			<div class="gridContainerItemNotes">
-				<Card headline="Notes" :isProfile="false"/>
+				<Card headline="Notes" :isProfile="false" :isNote="true"/>
 			</div>
 			<div class="gridContainerItemRunes">
 				<Card headline="Runen" :isProfile="false">
@@ -71,7 +71,7 @@ export default Vue.extend({
 					}, 
 				], 
 			}, (filename) => {
-				fs.writeFileSync(filename, JSON.stringify({}) ,'utf-8');
+				fs.writeFileSync(filename, JSON.stringify(this.$store.state.Matchup.selectedMatchupData) ,'utf-8');
 			})
 		}
 	},

@@ -1,7 +1,7 @@
 <template>
 	<div id="app">
 		<sidebar/>
-		<router-view></router-view>
+		<router-view class="routerView"></router-view>
 	</div>
 </template>
 
@@ -9,6 +9,7 @@
 import Sidebar from "./components/Sidebar.vue";
 import Vue from "vue";
 import { FileUtil } from "./utils/FileUtil";
+const { ipcRenderer } = require('electron')
 
 export default Vue.extend({
 	name: "app",
@@ -27,7 +28,18 @@ export default Vue.extend({
 	methods: {},
 	async updated() {
 },
-	async mounted() {
+	mounted() {
+		ipcRenderer.send("gimme-openedfile");
+		ipcRenderer.on('openedfile', (event, args: string) => {
+			if (FileUtil.isMatchupFile(args)) {
+				//@ts-ignore
+				this.$buefy.toast.open({
+					message: `You already created a matchup page for <b>${args}</b>!`,
+					type: 'is-success',
+					duration: 4000,
+				});
+			}
+		})
 	}
 });
 </script>
@@ -41,6 +53,10 @@ export default Vue.extend({
 	$finalWidth: 100vw;
 	$finalHeight: 116px;
 	$scrollBarHeight: 5px;
+
+	.routerView {
+		margin-left: 70px;
+	}
 
 	* {
 		padding: 0;
@@ -186,9 +202,6 @@ button {
 		width: 100%;
 	}
 
-	.wrapper {
-		width: 100%;
-	}
 
 	.contentSidebarCollapsed {
 		display: flex;

@@ -15,5 +15,10 @@ export default new Router({
       name: 'matchup',
       component: require('@/layouts/Matchup').default
     },
+    {
+      path: '/settings',
+      name: 'settings',
+      component: require('@/layouts/Settings').default
+    },
   ]
 })

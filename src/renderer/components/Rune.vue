@@ -1,11 +1,13 @@
 <template>
   <img
     v-if="rune === -1 && !isKeystone"
+    class="rune"
     :src="`./static/no-rune.png`"
     @click="disabled ? null : $emit('click')"
   />
   <img
     v-else-if="rune === -1 && isKeystone"
+    class="keystone"
     :src="`./static/no-keystone.png`"
     @click="disabled ? null : $emit('click')"
   />

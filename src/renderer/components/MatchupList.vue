@@ -37,11 +37,11 @@
                         <img src="../assets/position/Position_Grandmaster-Support.png" v-if="matchup.role === 'Support'" />
                     </td>
                     <td class="roleCell" v-if="index === indexToEdit">
-                        <img src="../assets/position/Position_Grandmaster-Top.png" @click="toggleRole('Top')" v-if="dataToEdit.role === 'Top' || showRoleSelection" />
-                        <img src="../assets/position/Position_Grandmaster-Jungle.png" @click="toggleRole('Jungle')" v-if="dataToEdit.role === 'Jungle' || showRoleSelection" />
-                        <img src="../assets/position/Position_Grandmaster-Mid.png" @click="toggleRole('Mid')" v-if="dataToEdit.role === 'Mid' || showRoleSelection" />
-                        <img src="../assets/position/Position_Grandmaster-Bot.png" @click="toggleRole('Bot')" v-if="dataToEdit.role === 'Bot' || showRoleSelection" />
-                        <img src="../assets/position/Position_Grandmaster-Support.png" @click="toggleRole('Support')" v-if="dataToEdit.role === 'Support' || showRoleSelection" />
+                        <img src="../assets/position/Position_Grandmaster-Top.png" @click="toggleRole('Top', index)" v-if="dataToEdit.role === 'Top' || showRoleSelection" />
+                        <img src="../assets/position/Position_Grandmaster-Jungle.png" @click="toggleRole('Jungle', index)" v-if="dataToEdit.role === 'Jungle' || showRoleSelection" />
+                        <img src="../assets/position/Position_Grandmaster-Mid.png" @click="toggleRole('Mid', index)" v-if="dataToEdit.role === 'Mid' || showRoleSelection" />
+                        <img src="../assets/position/Position_Grandmaster-Bot.png" @click="toggleRole('Bot', index)" v-if="dataToEdit.role === 'Bot' || showRoleSelection" />
+                        <img src="../assets/position/Position_Grandmaster-Support.png" @click="toggleRole('Support', index)" v-if="dataToEdit.role === 'Support' || showRoleSelection" />
                     </td>
 
                     <!-- Champion Cell -->
@@ -194,12 +194,11 @@ export default Vue.extend({
         }
     },
     methods: {
-        toggleRole(role: string): void {
+        toggleRole(role: string, index: number): void {
             this.showRoleSelection = !this.showRoleSelection;
             if (!this.showRoleSelection) {
-                (this.dataToEdit as Matchup.IMatchupData).role = role;
+                (this.dataToEdit as Matchup.IMatchupData).matchupList[index].role = role;
             }
-
         },
         selectChampion(option: string): void {
             console.log(option);

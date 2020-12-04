@@ -442,6 +442,11 @@ button.button.is-danger {
 	background: #1de9b6;
 }
 
+.notices .toast.is-danger {
+	color: #fff;
+	background: #F44236;
+}
+
 .notices .toast {
 	display: inline-flex;
 	animation-duration: 0.15s;

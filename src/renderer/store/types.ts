@@ -42,7 +42,6 @@ export namespace Matchup {
 
 	export interface IMatchupData {
 		champion: string;
-		role: string;
 		notes: string;
 		items: string;
 		runeSets: IRuneSet[];

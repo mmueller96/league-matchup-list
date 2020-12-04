@@ -16,7 +16,7 @@ const mutations: Matchup.Mutations = {
 		state.matchupList.push({id: payload.id, name: payload.name});
 	},
 	removeMatchup(state: Matchup.State, payload: Matchup.IMatchupListItem): void {
-		state.matchupList.filter((element: Matchup.IMatchupListItem) => {
+		state.matchupList = state.matchupList.filter((element: Matchup.IMatchupListItem) => {
 			return element.id !== payload.id;
 		})
 	},
