@@ -1,5 +1,6 @@
 import { ActionContext } from 'vuex';
 import { IMatchupList, IRuneSet, ISkillOrder } from '../components/types';
+import { Content } from '../types/editor';
 
 export namespace Matchup {
 	export interface State {
@@ -21,6 +22,7 @@ export namespace Matchup {
 		setRuneData: (state: Matchup.State, runeData: any) => void;
 		addMatchupListItemToMatchupData: (state: Matchup.State, matchup: IMatchupList) => void;
 		setRuneSetsFromData: (state: Matchup.State, runeSets: IRuneSet[]) => void;
+		setNotesFromData: (state: Matchup.State, notes: Content) => void;
 	}
 
 	export interface Actions {
@@ -42,7 +44,7 @@ export namespace Matchup {
 
 	export interface IMatchupData {
 		champion: string;
-		notes: string;
+		notes: Content;
 		items: string;
 		runeSets: IRuneSet[];
 		skillOrder: ISkillOrder;

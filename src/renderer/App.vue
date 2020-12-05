@@ -174,7 +174,79 @@ button {
 		font-size: 10px;
 		margin-top: 20px;
 	}
-}
+
+	&.actionButton {
+		width: 39px;
+    	height: 39px;
+      color: white;
+      cursor: pointer;
+      outline: none;
+      border: none;
+      padding: 0;
+      border-radius: 100%;
+
+	  &.is-small {
+		width: 18px;
+		height: 18px;
+		font-size: 8px;
+	  }
+
+      &.edit {
+        background: linear-gradient(
+          90deg,
+          rgba(29, 196, 233, 1) 0%,
+          rgba(29, 233, 182, 1) 100%
+        );
+        margin-right: 5px;
+      }
+
+      &.save {
+        background: linear-gradient(
+          90deg,
+          rgba(29, 196, 233, 1) 0%,
+          rgba(29, 233, 182, 1) 100%
+        );
+        margin-right: 5px;
+      }
+
+      &.delete_ {
+        background: linear-gradient(
+          90deg,
+          rgba(141, 10, 2, 1) 0%,
+          rgba(244, 66, 54, 1) 100%
+        );
+      }
+
+      &.cancel {
+        background: linear-gradient(
+          90deg,
+          rgba(141, 10, 2, 1) 0%,
+          rgba(244, 66, 54, 1) 100%
+        );
+      }
+    }
+	}
+
+	.editor__content {
+		strong {
+			font-weight: 600;
+		}
+
+		ul {
+			list-style: none;
+
+			>li {
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				
+				&::before {
+					content: "-";
+					margin-right: 10px;
+				}
+			}
+    	}
+  	}
 
 	.display-none {
 		display: none;

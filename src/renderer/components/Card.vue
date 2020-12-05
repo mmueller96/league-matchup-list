@@ -60,7 +60,7 @@ export default Vue.extend({
         background: white;
 
         &.isNote {
-            height: calc(100% - 60px);
+            height: calc(330px - 60px);
         }
     }
 

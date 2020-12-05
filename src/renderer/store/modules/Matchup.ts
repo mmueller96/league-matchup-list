@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { IMatchupList, IRuneSet } from '../../components/types';
+import { Content } from '../../types/editor';
 import { FileUtil } from '../../utils/FileUtil';
 import { Matchup } from '../types';
 
@@ -51,6 +52,12 @@ const mutations: Matchup.Mutations = {
 	setRuneSetsFromData(state: Matchup.State, runeSets: IRuneSet[]): void {
 		//@ts-ignore
 		state.selectedMatchupData.runeSets = runeSets;
+		//@ts-ignore
+		FileUtil.writeFile(state.selectedMatchupData);
+	},
+	setNotesFromData(state: Matchup.State, notes: Content): void {
+		//@ts-ignore
+		state.selectedMatchupData.notes = notes;
 		//@ts-ignore
 		FileUtil.writeFile(state.selectedMatchupData);
 	},

@@ -3,10 +3,10 @@
     <!-- Rune Head -->
     <div class="runeHead" v-if="!isEdit">
       <h5>{{ dataToEdit.title }}</h5>
-      <button class="actionButton edit" @click="$emit('edit')">
+      <button class="actionButton edit is-small" @click="$emit('edit')">
         <font-awesome-icon :icon="icon.edit" size="1x" />
       </button>
-      <button class="actionButton delete_" @click="$emit('delete_')">
+      <button class="actionButton delete_ is-small" @click="$emit('delete_')">
         <font-awesome-icon :icon="icon.delete" size="1x" />
       </button>
     </div>
@@ -14,12 +14,12 @@
     <div class="runeHead" v-else>
       <input class="h5" v-model="dataToEdit.title" />
       <button
-        class="actionButton save"
+        class="actionButton save is-small"
         @click="$emit('save', dataToEdit, index)"
       >
         <font-awesome-icon :icon="icon.save" size="1x" />
       </button>
-      <button class="actionButton cancel" @click="cancel()">
+      <button class="actionButton cancel is-small" @click="cancel()">
         <font-awesome-icon :icon="icon.cancel" size="1x" />
       </button>
     </div>
@@ -478,52 +478,6 @@ export default Vue.extend({
 
   > .runeHead {
     display: flex;
-
-    > .actionButton {
-      width: 18px;
-      height: 18px;
-      color: white;
-      cursor: pointer;
-      outline: none;
-      border: none;
-      padding: 0;
-      font-size: 8px;
-      border-radius: 100%;
-
-      &.edit {
-        background: linear-gradient(
-          90deg,
-          rgba(29, 196, 233, 1) 0%,
-          rgba(29, 233, 182, 1) 100%
-        );
-        margin-right: 5px;
-      }
-
-      &.save {
-        background: linear-gradient(
-          90deg,
-          rgba(29, 196, 233, 1) 0%,
-          rgba(29, 233, 182, 1) 100%
-        );
-        margin-right: 5px;
-      }
-
-      &.delete_ {
-        background: linear-gradient(
-          90deg,
-          rgba(141, 10, 2, 1) 0%,
-          rgba(244, 66, 54, 1) 100%
-        );
-      }
-
-      &.cancel {
-        background: linear-gradient(
-          90deg,
-          rgba(141, 10, 2, 1) 0%,
-          rgba(244, 66, 54, 1) 100%
-        );
-      }
-    }
 
     > h5 {
       margin-bottom: 12px;

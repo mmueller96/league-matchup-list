@@ -48,7 +48,7 @@ export default Vue.extend({
 		async addData(): Promise<void> {
 			let emptyData: Matchup.IMatchupData = {
 				champion: this.championToAdd,
-  				notes: "",
+  				notes: {type: "doc", content: [{type: "paragraph"}]},
   				items: "",
 				runeSets: [],
   				skillOrder: {
