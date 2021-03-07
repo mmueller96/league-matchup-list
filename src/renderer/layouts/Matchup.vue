@@ -128,6 +128,7 @@ export default Vue.extend({
 
 		.gridContainerItemRunes {
 			grid-area: runes;
+			min-width: 411.219px;
 		}
 
 		.gridContainerItemSkillOrder {

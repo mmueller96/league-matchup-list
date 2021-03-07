@@ -8,6 +8,7 @@
     "noUnusedLocals": true,
     "experimentalDecorators": true,
     "noImplicitAny": false,
+    "strictNullChecks": false,
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
   }

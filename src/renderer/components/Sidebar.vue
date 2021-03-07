@@ -106,6 +106,12 @@ $primaryColor: #f51d45;
 		height: inherit;
 		display: flex;
     	flex-direction: column;
+
+		> div {
+			margin-top: 15px;
+			width: 39px;
+			height: 39px;
+		}
 		  
 		.addMatchupButton {
 		    width: 39px;
@@ -131,6 +137,7 @@ $primaryColor: #f51d45;
 
 		.bottom {
 			margin-top: auto;
+			margin-bottom: 15px;
 		}
 	}
 }

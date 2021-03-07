@@ -22,6 +22,7 @@ export namespace Matchup {
 		setRuneData: (state: Matchup.State, runeData: any) => void;
 		addMatchupListItemToMatchupData: (state: Matchup.State, matchup: IMatchupList) => void;
 		setRuneSetsFromData: (state: Matchup.State, runeSets: IRuneSet[]) => void;
+		setSkillOrderFromData: (state: Matchup.State, skillOrder: string[]) => void;
 		setNotesFromData: (state: Matchup.State, notes: Content) => void;
 	}
 

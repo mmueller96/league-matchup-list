@@ -55,6 +55,12 @@ const mutations: Matchup.Mutations = {
 		//@ts-ignore
 		FileUtil.writeFile(state.selectedMatchupData);
 	},
+	setSkillOrderFromData(state: Matchup.State, skillOder: string[]): void {
+		//@ts-ignore
+		state.selectedMatchupData.skillOrder = skillOder;
+		//@ts-ignore
+		FileUtil.writeFile(state.selectedMatchupData);
+	},
 	setNotesFromData(state: Matchup.State, notes: Content): void {
 		//@ts-ignore
 		state.selectedMatchupData.notes = notes;

@@ -92,7 +92,7 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .noteWrapper {
-    height: calc(100% - 25px);
+    height: calc(100% - 55px);
     position: relative;
 
     >.note {

@@ -38,8 +38,9 @@
                     <td class="secondCol">
                         <img :src="`http://ddragon.leagueoflegends.com/cdn/10.23.1/img/spell/${championData.data[selectedMatchup].spells[0].image.full}`" class="skillImage"/>
                     </td>
-                    <td class="level tableColBorderRight" v-for="(spell, index) in skillOrder" v-bind:key="`spellQ${index}`">
-                        <div class="skilled" v-if="spell === 'Q'"/>
+                    <td class="level tableColBorderRight" v-for="(spell, index) in skillOrderState" v-bind:key="`spellQ${index}`" ref="qSpellRow">
+                        <div class="skilled" v-if="spell === 'Q' && !isEdit"/>
+                        <div v-else-if="isEdit"><button :class="spell === 'Q' ? 'skilled' : ''" @click="setSkill('Q', index)"></button></div>
                     </td>
                 </tr>
                 <tr>
@@ -50,8 +51,9 @@
                     <td class="secondCol">
                         <img :src="`http://ddragon.leagueoflegends.com/cdn/10.23.1/img/spell/${championData.data[selectedMatchup].spells[1].image.full}`" class="skillImage"/>
                     </td>
-                    <td class="level tableColBorderRight" v-for="(spell, index) in skillOrder" v-bind:key="`spellW${index}`">
-                        <div class="skilled" v-if="spell === 'W'"/>
+                    <td class="level tableColBorderRight" v-for="(spell, index) in skillOrderState" v-bind:key="`spellW${index}`" ref="wSpellRow">
+                        <div class="skilled" v-if="spell === 'W' && !isEdit"/>
+                        <div v-else-if="isEdit"><button :class="spell === 'W' ? 'skilled' : ''" @click="setSkill('W', index)"></button></div>
                     </td>
                 </tr>
                 <tr>
@@ -62,8 +64,9 @@
                     <td class="secondCol">
                         <img :src="`http://ddragon.leagueoflegends.com/cdn/10.23.1/img/spell/${championData.data[selectedMatchup].spells[2].image.full}`" class="skillImage"/>
                     </td>
-                    <td class="level tableColBorderRight" v-for="(spell, index) in skillOrder" v-bind:key="`spellE${index}`">
-                        <div class="skilled" v-if="spell === 'E'"/>
+                    <td class="level tableColBorderRight" v-for="(spell, index) in skillOrderState" v-bind:key="`spellE${index}`" ref="eSpellRow">
+                        <div class="skilled" v-if="spell === 'E' && !isEdit"/>
+                        <div v-else-if="isEdit"><button :class="spell === 'E' ? 'skilled' : ''" @click="setSkill('E', index)"></button></div>
                     </td>
                 </tr>
                 <tr>
@@ -74,8 +77,9 @@
                     <td class="secondCol">
                         <img :src="`http://ddragon.leagueoflegends.com/cdn/10.23.1/img/spell/${championData.data[selectedMatchup].spells[3].image.full}`" class="skillImage"/>
                     </td>
-                    <td class="level tableColBorderRight" v-for="(spell, index) in skillOrder" v-bind:key="`spellR${index}`">
-                        <div class="skilled" v-if="spell === 'R'"/>
+                    <td class="level tableColBorderRight" v-for="(spell, index) in skillOrderState" v-bind:key="`spellR${index}`" ref="rSpellRow">
+                        <div class="skilled" v-if="spell === 'R' && !isEdit"/>
+                        <div v-else-if="isEdit"><button :class="spell === 'R' ? 'skilled' : ''" @click="setSkill('R', index)"></button></div>
                     </td>
                 </tr>
             </tbody>
@@ -84,16 +88,133 @@
         <div>
             {{ description }}
         </div>
+        <div>
+            <!-- action button section -->
+            <div v-if="!isEdit" class="noteActions">
+                <button class="actionButton edit" @click="edit()">
+                    <font-awesome-icon :icon="icon.edit" size="1x" />
+                </button>
+            </div>
+            <div v-else class="noteActions">
+                <button class="actionButton save" @click="save()">
+                    <font-awesome-icon :icon="icon.save" size="1x" />
+                </button>
+                <button class="actionButton cancel" @click="cancel()">
+                    <font-awesome-icon :icon="icon.cancel" size="1x" />
+                </button>
+            </div>
+        </div>
     </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 import { Matchup } from "../store/types";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faSave } from "@fortawesome/free-solid-svg-icons";
+import { faPen } from "@fortawesome/free-solid-svg-icons";
 
 export default Vue.extend({
-	name: "skillOrder",
+    name: "skillOrder",
+    components: { FontAwesomeIcon },
     props: ["skillOrder", "description"],
+    data() {
+        return {
+            skillOrderState: [],
+            isEdit: false,
+            latestSpellSet: {},
+            icon: { cancel: faTimes, save: faSave, edit: faPen },
+        }
+    },
+    mounted() {
+        this.skillOrderState = [...this.skillOrder];
+    },
+    watch: {
+        skillOrder(newSkillOrder: string[]): void {
+            (this.skillOrderState as string[]) = newSkillOrder;
+        }
+    },
+    methods: {
+        checkSkill(spell: string, index: number) {
+            switch (spell) {
+                case "Q":
+                    (this.$refs.qSpellRow[index] as Element).children[0].children[0].classList.add('skilled');
+                    this.skillOrderState[index] = "Q";
+                    break;
+
+                case "W":
+                    (this.$refs.wSpellRow[index] as Element).children[0].children[0].classList.add('skilled');
+                    this.skillOrderState[index] = "W";
+                    break;
+
+                case "E":
+                    (this.$refs.eSpellRow[index] as Element).children[0].children[0].classList.add('skilled');
+                    this.skillOrderState[index] = "E";
+                    break;
+
+                case "R":
+                    (this.$refs.rSpellRow[index] as Element).children[0].children[0].classList.add('skilled');
+                    this.skillOrderState[index] = "R";
+                    break;
+
+                default:
+                    break;
+            }
+        },
+        uncheckSkill(spell: string, index: number) {
+            if (spell === "Q") (this.$refs.qSpellRow[index] as Element).children[0].children[0].classList.remove('skilled');
+            else if (spell === "W") (this.$refs.wSpellRow[index] as Element).children[0].children[0].classList.remove('skilled');
+            else if (spell === "E") (this.$refs.eSpellRow[index] as Element).children[0].children[0].classList.remove('skilled');
+            else if (spell === "R") (this.$refs.rSpellRow[index] as Element).children[0].children[0].classList.remove('skilled');
+            
+        },
+        setSkill(spell: string, index: number): void {
+            //check and uncheck for the current selected level
+            console.log(spell);
+            
+            if (spell === "Q") {
+                this.checkSkill("Q", index);
+                this.uncheckSkill("W", index);
+                this.uncheckSkill("E", index);
+                this.uncheckSkill("R", index);
+            } else if (spell === "W") {
+                this.checkSkill("W", index);
+                this.uncheckSkill("Q", index);
+                this.uncheckSkill("E", index);
+                this.uncheckSkill("R", index);
+            } else if (spell === "E") {
+                this.checkSkill("E", index);
+                this.uncheckSkill("Q", index);
+                this.uncheckSkill("W", index);
+                this.uncheckSkill("R", index);
+            } else if (spell === "R") {
+                this.checkSkill("R", index);
+                this.uncheckSkill("Q", index);
+                this.uncheckSkill("W", index);
+                this.uncheckSkill("E", index);
+            }            
+        },
+        save(): void {
+            console.log(this.skillOrderState);
+            
+            this.$store.commit("setSkillOrderFromData", { skillOrder: this.skillOrderState });
+            this.isEdit = false;
+            //@ts-ignore
+            this.$buefy.toast.open({
+                message: `Yaay! Your skills set was successfully saved!`,
+                type: "is-success",
+                duration: 4000
+            });
+        },
+        edit(): void {
+            this.isEdit = true;
+        },
+        cancel(): void {
+            this.skillOrderState = [...this.skillOrder];
+            this.isEdit = false;
+        },
+    },
     computed: {
         selectedMatchup(): string {
 			return this.$store.state.Matchup.selectedMatchup;
@@ -163,14 +284,26 @@ export default Vue.extend({
                         text-align: center;
                         vertical-align: center;
                         width: 20px;
+
+                        button:disabled {
+                            background: black;
+                        }
                     }
 
                     &.tableColBorderRight {
                         border-right: 1px solid #ECEDEF;
+
+                        &:last-child {
+                            border-right: none;
+                        }
                     }
                 }
             }
         }
+    }
+
+    .noteActions {
+        margin-top: 5px;
     }
 
     .cardProfile{

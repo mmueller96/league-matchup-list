@@ -53,7 +53,7 @@ export default Vue.extend({
 				runeSets: [],
   				skillOrder: {
     				description: "",
-    				skillOrder: []
+    				skillOrder: ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
 				},
 				matchupList: []
 			};

@@ -83,6 +83,7 @@ h3 {
   margin: 0;
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
+  margin-bottom: 30px;
 }
 
 h5 {
