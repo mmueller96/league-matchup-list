@@ -102,6 +102,18 @@ export interface ISkillOrder {
 	skillOrder: string[];
 }
 
+export interface IItem {
+	id: number;
+	name: string;
+	image: string;
+}
+
+export interface IItemSet {
+	title: string;
+	description: string;
+	items: IItem[];
+}
+
 export interface IMatchupList {
 	role: string;
 	champion: string;

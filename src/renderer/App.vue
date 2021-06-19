@@ -20,6 +20,7 @@ export default Vue.extend({
 	computed: {},
 	async beforeCreate() {
 		this.$store.dispatch("loadRuneData");
+		this.$store.dispatch("loadItemData");
 		let champions: string[] = FileUtil.readFileNamesFromDataDirectory();
 		this.$store.commit("setMatchupList", champions);
 	},

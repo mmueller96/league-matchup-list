@@ -23,7 +23,9 @@
 				</Card>
 			</div>
 			<div class="gridContainerItemItems">
-				<Card headline="Items" :isProfile="false"/>
+				<Card headline="Items" :isProfile="false">
+					<Items :itemSets="selectedItemSet" />
+				</Card>
 			</div>
 			<div class="gridContainerItemMatchupList">
 				<Card headline="Matchup List" :isProfile="false">
@@ -43,9 +45,10 @@ import Card from "@/components/Card.vue";
 import SkillOrder from "@/components/SkillOrder.vue";
 import MatchupList from "@/components/MatchupList.vue";
 import Runes from "@/components/RuneSets.vue";
+import Items from "@/components/ItemSets.vue";
 import Note from "@/components/Note.vue";
 const path = require('path'); 
-import { IRuneSet, ISkillOrder, IMatchupList } from "../components/types";
+import { IRuneSet, ISkillOrder, IMatchupList, IItemSet } from "../components/types";
 import { Matchup } from "../store/types";
 import { Content } from "../types/editor";
 const { dialog } = require('electron').remote;
@@ -53,7 +56,7 @@ const fs = require('fs');
 
 export default Vue.extend({
 	name: "matchup",
-	components: { Card, SkillOrder, Runes, MatchupList, Note },
+	components: { Card, SkillOrder, Runes, MatchupList, Note, Items },
 	data() {
 		return {};
 	},
@@ -94,6 +97,9 @@ export default Vue.extend({
 		},
 		selectedMatchupNote(): Content {
 			return (this.$store.state.Matchup.selectedMatchupData as Matchup.IMatchupData).notes;
+		},
+		selectedItemSet(): IItemSet[] {
+			return (this.$store.state.Matchup.selectedMatchupData as Matchup.IMatchupData).items;
 		}
 	}
 });

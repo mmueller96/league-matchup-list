@@ -49,7 +49,7 @@ export default Vue.extend({
 			let emptyData: Matchup.IMatchupData = {
 				champion: this.championToAdd,
   				notes: {type: "doc", content: [{type: "paragraph"}]},
-  				items: "",
+  				items: [],
 				runeSets: [],
   				skillOrder: {
     				description: "",

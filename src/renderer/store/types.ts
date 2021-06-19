@@ -1,5 +1,5 @@
 import { ActionContext } from 'vuex';
-import { IMatchupList, IRuneSet, ISkillOrder } from '../components/types';
+import { IItemSet, IMatchupList, IRuneSet, ISkillOrder } from '../components/types';
 import { Content } from '../types/editor';
 
 export namespace Matchup {
@@ -9,6 +9,7 @@ export namespace Matchup {
 		selectedMatchupData: IMatchupData | undefined,
 		championData: IChampionData | undefined;
 		runeData: any;
+		itemData: any;
 	}
 
 	export interface Mutations {
@@ -20,15 +21,18 @@ export namespace Matchup {
 		selectMatchup: (state: Matchup.State, champion: string) => void;
 		setChampionData: (state: Matchup.State, payload: IChampionData) => void;
 		setRuneData: (state: Matchup.State, runeData: any) => void;
+		setItemData: (state: Matchup.State, itemData: any) => void;
 		addMatchupListItemToMatchupData: (state: Matchup.State, matchup: IMatchupList) => void;
 		setRuneSetsFromData: (state: Matchup.State, runeSets: IRuneSet[]) => void;
+		setItemSetsFromData: (state: Matchup.State, itemSets: IItemSet[]) => void;
 		setSkillOrderFromData: (state: Matchup.State, skillOrder: string[]) => void;
 		setNotesFromData: (state: Matchup.State, notes: Content) => void;
 	}
 
 	export interface Actions {
 		pickMatchup: (context: ActionContext<Matchup.State, Matchup.State>, champion: IMatchupListItem) => void;
-		loadRuneData: (context: ActionContext<Matchup.State, Matchup.State>) => void
+		loadRuneData: (context: ActionContext<Matchup.State, Matchup.State>) => void;
+		loadItemData: (context: ActionContext<Matchup.State, Matchup.State>) => void;
 	}
 
 	export interface IMatchupListItem {
@@ -46,7 +50,7 @@ export namespace Matchup {
 	export interface IMatchupData {
 		champion: string;
 		notes: Content;
-		items: string;
+		items: IItemSet[];
 		runeSets: IRuneSet[];
 		skillOrder: ISkillOrder;
 		matchupList: IMatchupList[];

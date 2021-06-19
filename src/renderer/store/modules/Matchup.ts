@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IMatchupList, IRuneSet } from '../../components/types';
+import { IItemSet, IMatchupList, IRuneSet } from '../../components/types';
 import { Content } from '../../types/editor';
 import { FileUtil } from '../../utils/FileUtil';
 import { Matchup } from '../types';
@@ -10,6 +10,7 @@ const state: Matchup.State = {
 	selectedMatchup: undefined,
 	selectedMatchupData: undefined,
 	runeData: undefined,
+	itemData: undefined,
 };
 
 const mutations: Matchup.Mutations = {
@@ -45,6 +46,9 @@ const mutations: Matchup.Mutations = {
 	setRuneData(state: Matchup.State, runeData: any): void {
 		state.runeData = runeData;
 	},
+	setItemData(state: Matchup.State, itemData: any): void {
+		state.itemData = itemData;
+	},
 	addMatchupListItemToMatchupData(state: Matchup.State, matchup: IMatchupList): void {
 		//@ts-ignore
 		state.selectedMatchupData.matchupList.push(matchup);
@@ -58,6 +62,12 @@ const mutations: Matchup.Mutations = {
 	setSkillOrderFromData(state: Matchup.State, skillOder: string[]): void {
 		//@ts-ignore
 		state.selectedMatchupData.skillOrder = skillOder;
+		//@ts-ignore
+		FileUtil.writeFile(state.selectedMatchupData);
+	},
+	setItemSetsFromData(state: Matchup.State, itemSets: IItemSet[]): void {
+		//@ts-ignore
+		state.selectedMatchupData.items = itemSets;
 		//@ts-ignore
 		FileUtil.writeFile(state.selectedMatchupData);
 	},
@@ -79,6 +89,10 @@ const actions: Matchup.Actions = {
 	async loadRuneData({ commit }): Promise<void> {
 		let responseData = await axios.get(`https://ddragon.leagueoflegends.com/cdn/10.24.1/data/en_GB/runesReforged.json`);
 		commit("setRuneData", responseData.data);
+	},
+	async loadItemData({ commit }): Promise<void> {
+		let responseData = await axios.get(`http://ddragon.leagueoflegends.com/cdn/11.5.1/data/en_US/item.json`);
+		commit("setItemData", responseData.data);
 	}
 };
 
